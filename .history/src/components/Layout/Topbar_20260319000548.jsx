@@ -30,24 +30,31 @@ export default function Topbar({ isMobile, sidebarOpen, setSidebarOpen, section 
 
       {/* Burger */}
       <button
-        onClick={() => setSidebarOpen(!sidebarOpen)}
-        style={{
-          background: "transparent",
-          border: "none",
-          cursor: "pointer",
-          padding: "6px",
-          display: "flex",
-          flexDirection: "column",
-          gap: 4,
-          borderRadius: 6,
-          flexShrink: 0,
-        }}
-      >
-        <span style={lineStyle(sidebarOpen ? { transform: "rotate(45deg) translate(4px, 4px)" } : {})} />
-        <span style={lineStyle(sidebarOpen ? { opacity: 0, transform: "scaleX(0)" } : {})} />
-        <span style={lineStyle(sidebarOpen ? { transform: "rotate(-45deg) translate(4px, -4px)" } : {})} />
-      </button>
-
+  onClick={() => setSidebarOpen(!sidebarOpen)}
+  style={{
+    background: "transparent",
+    border: "none",
+    cursor: "pointer",
+    padding: "6px",
+    display: "flex",
+    flexDirection: "column",
+    gap: 4,
+    borderRadius: 6,
+    flexShrink: 0,
+    transition: "transform 0.3s ease",
+    transform: sidebarOpen ? "rotate(0deg)" : "rotate(180deg)" // Fait pivoter le bouton complet
+  }}
+>
+  <span style={{ 
+    color: acc, 
+    fontSize: "14px", 
+    fontWeight: "bold", 
+    letterSpacing: "-2px",
+    lineHeight: 1
+  }}>
+    {"<<"}
+  </span>
+</button>
       {/* Logo */}
       <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
         <div style={{

@@ -63,7 +63,7 @@ export default function Sidebar({ activeId, onSelect }) {
                 left: 0, top: "20%", bottom: "20%",
                 width: 3,
                 borderRadius: 2,
-                background: s.color,
+                background: #fff,
                 boxShadow: `0 0 8px ${s.color}`,
               }} />
             )}

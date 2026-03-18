@@ -74,7 +74,7 @@ export default function Topbar({ isMobile, sidebarOpen, setSidebarOpen, section 
           </div>
           {!isMobile && (
             <div style={{ fontSize: 9, color: theme.muted, letterSpacing: 1 }}>
-              ALTERNANCE · BACHELOR 1 à 3
+              ALTERNANCE · Bac
             </div>
           )}
         </div>

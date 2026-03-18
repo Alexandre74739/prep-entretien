@@ -43,9 +43,16 @@ export default function Topbar({ isMobile, sidebarOpen, setSidebarOpen, section 
           flexShrink: 0,
         }}
       >
-        <span style={lineStyle(sidebarOpen ? { transform: "rotate(45deg) translate(4px, 4px)" } : {})} />
-        <span style={lineStyle(sidebarOpen ? { opacity: 0, transform: "scaleX(0)" } : {})} />
-        <span style={lineStyle(sidebarOpen ? { transform: "rotate(-45deg) translate(4px, -4px)" } : {})} />
+        <span style={{ 
+    fontSize: 14, 
+    fontWeight: 800, 
+    color: acc, 
+    letterSpacing: -2,
+    display: "inline-block",
+    transform: "translateX(-1px)" // Centrage optique du <<
+  }}>
+    {"<<"}
+  </span>
       </button>
 
       {/* Logo */}

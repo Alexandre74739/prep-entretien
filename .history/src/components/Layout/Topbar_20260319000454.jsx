@@ -30,23 +30,33 @@ export default function Topbar({ isMobile, sidebarOpen, setSidebarOpen, section 
 
       {/* Burger */}
       <button
-        onClick={() => setSidebarOpen(!sidebarOpen)}
-        style={{
-          background: "transparent",
-          border: "none",
-          cursor: "pointer",
-          padding: "6px",
-          display: "flex",
-          flexDirection: "column",
-          gap: 4,
-          borderRadius: 6,
-          flexShrink: 0,
-        }}
-      >
-        <span style={lineStyle(sidebarOpen ? { transform: "rotate(45deg) translate(4px, 4px)" } : {})} />
-        <span style={lineStyle(sidebarOpen ? { opacity: 0, transform: "scaleX(0)" } : {})} />
-        <span style={lineStyle(sidebarOpen ? { transform: "rotate(-45deg) translate(4px, -4px)" } : {})} />
-      </button>
+  onClick={() => setSidebarOpen(!sidebarOpen)}
+  style={{
+    background: dark ? "#2a2d3a" : "#e2e8f0", // Utilisation directe de dark
+    border: "none",
+    cursor: "pointer",
+    width: 32,
+    height: 32,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: "50%",
+    transition: "all 0.3s ease",
+    transform: sidebarOpen ? "rotate(0deg)" : "rotate(180deg)",
+    flexShrink: 0,
+  }}
+>
+  <span style={{ 
+    fontSize: 14, 
+    fontWeight: 800, 
+    color: acc, 
+    letterSpacing: -2,
+    display: "inline-block",
+    transform: "translateX(-1px)" // Centrage optique du <<
+  }}>
+    {"<<"}
+  </span>
+</button>
 
       {/* Logo */}
       <div style={{ display: "flex", alignItems: "center", gap: 8 }}>

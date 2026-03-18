@@ -61,7 +61,7 @@ export default function Sidebar({ activeId, onSelect }) {
               <div style={{
                 position: "absolute",
                 left: 0, top: "20%", bottom: "20%",
-                width: 3,
+                width: 8,
                 borderRadius: 2,
                 background: s.color,
                 boxShadow: `0 0 8px ${s.color}`,

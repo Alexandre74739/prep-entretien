@@ -30,23 +30,38 @@ export default function Topbar({ isMobile, sidebarOpen, setSidebarOpen, section 
 
       {/* Burger */}
       <button
-        onClick={() => setSidebarOpen(!sidebarOpen)}
-        style={{
-          background: "transparent",
-          border: "none",
-          cursor: "pointer",
-          padding: "6px",
-          display: "flex",
-          flexDirection: "column",
-          gap: 4,
-          borderRadius: 6,
-          flexShrink: 0,
-        }}
-      >
-        <span style={lineStyle(sidebarOpen ? { transform: "rotate(45deg) translate(4px, 4px)" } : {})} />
-        <span style={lineStyle(sidebarOpen ? { opacity: 0, transform: "scaleX(0)" } : {})} />
-        <span style={lineStyle(sidebarOpen ? { transform: "rotate(-45deg) translate(4px, -4px)" } : {})} />
-      </button>
+      onClick={() => setSidebarOpen(!sidebarOpen)}
+      aria-label={sidebarOpen ? "Fermer le menu" : "Ouvrir le menu"}
+      style={{
+        background: sidebarOpen ? `${t.muted}15` : "transparent",
+        border: "none",
+        cursor: "pointer",
+        padding: "10px",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        gap: "4px",
+        borderRadius: "8px",
+        transition: "background 0.2s",
+        width: "36px",
+        height: "36px",
+      }}
+    >
+      {/* Barre du haut */}
+      <span style={barStyle({
+        transform: sidebarOpen 
+          ? "rotate(-45deg) translate(-2px, 2px)" // Forme <
+          : "rotate(45deg) translate(2px, 2px)"   // Forme >
+      })} />
+      
+      {/* Barre du bas */}
+      <span style={barStyle({
+        transform: sidebarOpen 
+          ? "rotate(45deg) translate(-2px, -2px)" // Forme <
+          : "rotate(-45deg) translate(2px, -2px)"  // Forme >
+      })} />
+    </button>
 
       {/* Logo */}
       <div style={{ display: "flex", alignItems: "center", gap: 8 }}>

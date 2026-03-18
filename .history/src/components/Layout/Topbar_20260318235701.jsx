@@ -42,6 +42,7 @@ export default function Topbar({ isMobile, sidebarOpen, setSidebarOpen, section 
           borderRadius: 6,
           flexShrink: 0,
         }}
+        clicl
       >
         <span style={lineStyle(sidebarOpen ? { transform: "rotate(45deg) translate(4px, 4px)" } : {})} />
         <span style={lineStyle(sidebarOpen ? { opacity: 0, transform: "scaleX(0)" } : {})} />

@@ -65,7 +65,7 @@ export default function Topbar({ isMobile, sidebarOpen, setSidebarOpen, section 
             fontFamily: "'Syne', sans-serif",
             fontWeight: 800,
             fontSize: isMobile ? 13 : 15,
-            background: "linear-gradient(90deg, #38bdf8, #818cf8)",
+            background: "",
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
             letterSpacing: 0.5,

@@ -89,12 +89,7 @@ export default function App() {
         }
       `}</style>
 
-      <Topbar
-        isMobile={isMobile}
-        sidebarOpen={sidebarOpen}
-        setSidebarOpen={setSidebarOpen}
-        section={section}
-      />
+      
 
       <div style={{ display: "flex", height: "calc(100vh - 56px)", overflow: "hidden", position: "relative" }}>
 

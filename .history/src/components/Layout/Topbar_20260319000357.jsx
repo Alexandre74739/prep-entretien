@@ -30,23 +30,33 @@ export default function Topbar({ isMobile, sidebarOpen, setSidebarOpen, section 
 
       {/* Burger */}
       <button
-        onClick={() => setSidebarOpen(!sidebarOpen)}
-        style={{
-          background: "transparent",
-          border: "none",
-          cursor: "pointer",
-          padding: "6px",
-          display: "flex",
-          flexDirection: "column",
-          gap: 4,
-          borderRadius: 6,
-          flexShrink: 0,
-        }}
-      >
-        <span style={lineStyle(sidebarOpen ? { transform: "rotate(45deg) translate(4px, 4px)" } : {})} />
-        <span style={lineStyle(sidebarOpen ? { opacity: 0, transform: "scaleX(0)" } : {})} />
-        <span style={lineStyle(sidebarOpen ? { transform: "rotate(-45deg) translate(4px, -4px)" } : {})} />
-      </button>
+  onClick={() => setSidebarOpen(!sidebarOpen)}
+  style={{
+    background: t.border, // Utilisation de ta variable de thème existante pour le contraste
+    border: "none",
+    cursor: "pointer",
+    padding: "8px",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: "50%", // Bouton circulaire plus moderne
+    width: "32px",
+    height: "32px",
+    flexShrink: 0,
+    transition: "all 0.3s ease",
+    transform: sidebarOpen ? "rotate(0deg)" : "rotate(180deg)", // Rotation fluide du chevron
+  }}
+  title={sidebarOpen ? "Fermer le menu" : "Ouvrir le menu"}
+>
+  <span style={{ 
+    fontSize: "14px", 
+    fontWeight: "800", 
+    color: acc, // Ton accent de couleur dynamique
+    letterSpacing: "-2px" // Rapproche les chevrons pour un look d'icône "<<"
+  }}>
+    {"<<"}
+  </span>
+</button>
 
       {/* Logo */}
       <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
