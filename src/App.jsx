@@ -6,18 +6,19 @@ import CoursList from "./components/Cours/CoursList";
 import QuizPanel from "./components/Quiz/QuizPanel";
 import AddForm from "./components/Add/AddForm";
 import InterviewQuiz from "./components/Quiz/InterviewQuiz";
+import InstallBanner from "./components/Layout/InstallBanner";
 
 export default function App() {
   const { sections, theme, darkMode } = useApp();
 
-  const [activeId, setActiveId]       = useState(sections[0]?.id ?? "htmlcss");
-  const [tab, setTab]                 = useState("cours");
+  const [activeId, setActiveId] = useState(sections[0]?.id ?? "htmlcss");
+  const [tab, setTab] = useState("cours");
   const [sidebarOpen, setSidebarOpen] = useState(true);
-  const [isMobile, setIsMobile]       = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const [isInterview, setIsInterview] = useState(false);
 
   const section = sections.find((s) => s.id === activeId);
-  const acc     = isInterview ? "#f59e0b" : (section?.color || "#38bdf8");
+  const acc = isInterview ? "#f59e0b" : (section?.color || "#38bdf8");
 
   useEffect(() => {
     const check = () => {
@@ -139,7 +140,7 @@ export default function App() {
                     width: 8, height: 8, borderRadius: "50%",
                     background: acc, boxShadow: `0 0 8px ${acc}`,
                     animation: "pulse-dot 2s infinite",
-                  }}/>
+                  }} />
                   <span style={{ fontSize: 11, fontWeight: 600, color: acc, fontFamily: "'Syne', sans-serif" }}>
                     {section?.label ?? "—"}
                   </span>
@@ -147,8 +148,8 @@ export default function App() {
 
                 {[
                   { id: "cours", icon: "📖", label: "Cours" },
-                  { id: "quiz",  icon: "🧪", label: `Quiz · ${section?.quiz.length ?? 0}` },
-                  { id: "add",   icon: "➕", label: "Ajouter" },
+                  { id: "quiz", icon: "🧪", label: `Quiz · ${section?.quiz.length ?? 0}` },
+                  { id: "add", icon: "➕", label: "Ajouter" },
                 ].map(({ id, icon, label }) => {
                   const active = tab === id;
                   return (
@@ -171,7 +172,7 @@ export default function App() {
 
               <div className="fade-in" key={`${activeId}-${tab}`}>
                 {section && tab === "cours" && <CoursList section={section} />}
-                {section && tab === "quiz"  && <QuizPanel section={section} />}
+                {section && tab === "quiz" && <QuizPanel section={section} />}
                 {tab === "add" && (
                   <AddForm
                     currentSectionId={activeId}
@@ -183,6 +184,9 @@ export default function App() {
           )}
         </main>
       </div>
+
+      {/* Bannière d'installation PWA */}
+      <InstallBanner />
     </div>
   );
 }
