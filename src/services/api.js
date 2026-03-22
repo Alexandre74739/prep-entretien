@@ -1,52 +1,151 @@
+// ─────────────────────────────────────────────────────────────
 // src/services/api.js
 //
-// URL relative "/api" : fonctionne en local (vercel dev)
-// ET en production (vercel.app) sans rien changer.
+// Connexion directe à Supabase depuis le frontend.
+// Fonctionne en local (vite dev) ET en production sans serveur.
+// ─────────────────────────────────────────────────────────────
 
-const API_URL = "/api";
+import { supabase } from "../lib/supabase";
 
-async function request(method, path, body) {
-  const options = {
-    method,
-    headers: { "Content-Type": "application/json" },
-  };
-  if (body) options.body = JSON.stringify(body);
-
-  const res = await fetch(`${API_URL}${path}`, options);
-  if (!res.ok) {
-    const err = await res.json().catch(() => ({}));
-    throw new Error(err.error || `Erreur ${res.status}`);
-  }
-  return res.json();
-}
-
+// ── Sections custom ────────────────────────────────────────────
 export const sectionsApi = {
-  getAll:  ()              => request("GET",    "/sections"),
-  create:  (data)          => request("POST",   "/sections", data),
-  delete:  (id)            => request("DELETE", `/sections/${id}`),
+  async getAll() {
+    const { data, error } = await supabase
+      .from("custom_sections")
+      .select("*")
+      .order("created_at", { ascending: true });
+    if (error) throw new Error(error.message);
+    return data ?? [];
+  },
+
+  async create({ id, label, icon, color }) {
+    const { error } = await supabase
+      .from("custom_sections")
+      .insert({ id, label, icon, color });
+    if (error) throw new Error(error.message);
+    return { id };
+  },
+
+  async delete(id) {
+    const { error } = await supabase
+      .from("custom_sections")
+      .delete()
+      .eq("id", id);
+    if (error) throw new Error(error.message);
+  },
 };
 
+// ── Questions (cours) ──────────────────────────────────────────
 export const questionsApi = {
-  getAll:       ()         => request("GET",    "/questions"),
-  getBySection: (sectionId)=> request("GET",    `/questions?section=${sectionId}`),
-  create:       (data)     => request("POST",   "/questions", {
-    section_id: data.sectionId,
-    question:   data.question,
-    answer:     data.answer,
-  }),
-  update: (id, data)       => request("PUT",    `/questions/${id}`, data),
-  delete: (id)             => request("DELETE", `/questions/${id}`),
+  async getAll() {
+    const { data, error } = await supabase
+      .from("questions")
+      .select("*")
+      .eq("is_custom", true)
+      .order("created_at", { ascending: true });
+    if (error) throw new Error(error.message);
+    return data ?? [];
+  },
+
+  async getBySection(sectionId) {
+    const { data, error } = await supabase
+      .from("questions")
+      .select("*")
+      .eq("is_custom", true)
+      .eq("section_id", sectionId)
+      .order("created_at", { ascending: true });
+    if (error) throw new Error(error.message);
+    return data ?? [];
+  },
+
+  async create({ sectionId, question, answer }) {
+    const { data, error } = await supabase
+      .from("questions")
+      .insert({ section_id: sectionId, question, answer })
+      .select()
+      .single();
+    if (error) throw new Error(error.message);
+    return { id: data.id };
+  },
+
+  async update(id, { question, answer }) {
+    const { error } = await supabase
+      .from("questions")
+      .update({ question, answer })
+      .eq("id", id);
+    if (error) throw new Error(error.message);
+  },
+
+  async delete(id) {
+    const { error } = await supabase
+      .from("questions")
+      .delete()
+      .eq("id", id);
+    if (error) throw new Error(error.message);
+  },
 };
 
+// ── Quiz items (QCM) ───────────────────────────────────────────
 export const quizApi = {
-  getBySection: (sectionId) => request("GET",  `/quiz?section=${sectionId}`),
-  create:       (data)      => request("POST", "/quiz", {
-    section_id:  data.sectionId,
-    question:    data.question,
-    options:     data.options,
-    answer:      data.answer,
-    explanation: data.explanation,
-  }),
-  update: (id, data)        => request("PUT",    `/quiz/${id}`, data),
-  delete: (id)              => request("DELETE", `/quiz/${id}`),
+  async getBySection(sectionId) {
+    const { data, error } = await supabase
+      .from("quiz_items")
+      .select("*")
+      .eq("section_id", sectionId)
+      .order("created_at", { ascending: true });
+    if (error) throw new Error(error.message);
+
+    // Reformater les colonnes option_a/b/c/d en tableau
+    return (data ?? []).map((row) => ({
+      id:          row.id,
+      section_id:  row.section_id,
+      question:    row.question,
+      options:     [row.option_a, row.option_b, row.option_c, row.option_d],
+      answer:      row.answer,
+      explanation: row.explanation,
+    }));
+  },
+
+  async create({ sectionId, question, options, answer, explanation }) {
+    const { data, error } = await supabase
+      .from("quiz_items")
+      .insert({
+        section_id:  sectionId,
+        question,
+        option_a:    options[0],
+        option_b:    options[1],
+        option_c:    options[2],
+        option_d:    options[3],
+        answer,
+        explanation,
+      })
+      .select()
+      .single();
+    if (error) throw new Error(error.message);
+    return { id: data.id };
+  },
+
+  async update(id, { question, options, answer, explanation }) {
+    const { error } = await supabase
+      .from("quiz_items")
+      .update({
+        question,
+        option_a:    options[0],
+        option_b:    options[1],
+        option_c:    options[2],
+        option_d:    options[3],
+        answer,
+        explanation,
+      })
+      .eq("id", id);
+    if (error) throw new Error(error.message);
+  },
+
+  async delete(id) {
+    const { error } = await supabase
+      .from("quiz_items")
+      .delete()
+      .eq("id", id);
+    if (error) throw new Error(error.message);
+  },
 };

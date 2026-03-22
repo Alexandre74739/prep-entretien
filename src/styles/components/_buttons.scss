@@ -1,0 +1,127 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.btn {
+  @include flex-row($sp-2);
+  @include transition(all, $t-fast);
+  @include focus-ring;
+  justify-content: center;
+  padding: clamp(8px, 0.9vw, 10px) clamp(16px, 1.8vw, 20px);
+  border-radius: $r-md;
+  border: 1px solid transparent;
+  font-size: $fs-base;
+  font-weight: 600;
+  font-family: $f-body;
+  cursor: pointer;
+  white-space: nowrap;
+  user-select: none;
+
+  &:disabled { opacity: 0.35; cursor: not-allowed; pointer-events: none; }
+}
+
+// ── Primary ───────────────────────────────────────────────────
+.btn--primary {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  font-weight: 700;
+
+  &:hover:not(:disabled) {
+    filter: brightness(1.12);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px color-mix(in srgb, var(--accent) 35%, transparent);
+  }
+  &:active:not(:disabled) { transform: translateY(0); filter: brightness(0.95); }
+}
+
+// ── Outline ───────────────────────────────────────────────────
+.btn--outline {
+  border-color: var(--border-2);
+  background: transparent;
+  color: var(--text-sub);
+
+  &:hover:not(:disabled) {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: color-mix(in srgb, var(--accent) 6%, transparent);
+  }
+}
+
+// ── Ghost ─────────────────────────────────────────────────────
+.btn--ghost {
+  background: transparent;
+  color: var(--text-sub);
+  &:hover:not(:disabled) { background: var(--surface-hover); color: var(--text-2); }
+}
+
+// ── Danger ────────────────────────────────────────────────────
+.btn--danger {
+  border-color: color-mix(in srgb, var(--danger) 30%, transparent);
+  background: color-mix(in srgb, var(--danger) 6%, transparent);
+  color: var(--danger);
+
+  &:hover:not(:disabled) {
+    background: color-mix(in srgb, var(--danger) 12%, transparent);
+    border-color: color-mix(in srgb, var(--danger) 50%, transparent);
+  }
+}
+
+// ── Edit ──────────────────────────────────────────────────────
+.btn--edit {
+  border-color: var(--border-2);
+  background: transparent;
+  color: var(--text-sub);
+
+  &:hover:not(:disabled) {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: color-mix(in srgb, var(--accent) 6%, transparent);
+  }
+}
+
+// ── Back ──────────────────────────────────────────────────────
+.btn--back {
+  @include flex-row($sp-1);
+  @include transition(all, $t-fast);
+  @include focus-ring;
+  padding: clamp(5px, 0.6vw, 7px) clamp(10px, 1.2vw, 13px);
+  border-radius: $r-md;
+  border: 1px solid var(--border-2);
+  background: transparent;
+  color: var(--text-sub);
+  font-size: $fs-sm;
+  font-family: $f-body;
+  font-weight: 500;
+  cursor: pointer;
+  flex-shrink: 0;
+
+  &:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: color-mix(in srgb, var(--accent) 5%, transparent);
+  }
+}
+
+// ── Submit ────────────────────────────────────────────────────
+.btn--submit {
+  width: 100%;
+  padding: clamp(11px, 1.3vw, 14px);
+  font-size: $fs-md;
+  font-family: $f-display;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  border-radius: $r-lg;
+  border: none;
+  cursor: pointer;
+  @include transition(all, $t-fast);
+  @include focus-ring;
+  background: var(--accent);
+  color: #fff;
+
+  &:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.1);
+    box-shadow: 0 6px 20px color-mix(in srgb, var(--accent) 40%, transparent);
+  }
+  &:active { transform: translateY(0); filter: brightness(0.95); }
+}

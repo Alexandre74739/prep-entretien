@@ -1,0 +1,23 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.badge {
+  @include flex-row($sp-1);
+  display: inline-flex;
+  padding: 2px 8px;
+  border-radius: $r-full;
+  font-size: $fs-xs;
+  font-weight: 700;
+  font-family: $f-display;
+  border: 1px solid transparent;
+  white-space: nowrap;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+}
+
+.badge--custom {
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  border-color: color-mix(in srgb, var(--accent) 22%, transparent);
+  color: var(--accent);
+  padding: 2px 8px;
+}

@@ -446,7 +446,7 @@ export default function ReviewMode() {
 
 // ── Sous-composants ──────────────────────────────────────────
 
-function RateButton({ label, sublabel, color, onClick, theme }) {
+function RateButton({ label, sublabel, color, onClick }) {
     return (
         <button
             onClick={onClick}
@@ -483,7 +483,8 @@ function RateButton({ label, sublabel, color, onClick, theme }) {
     );
 }
 
-function StatsPanel({ sections, getCard, theme, darkMode, resetSRS }) {
+function StatsPanel({ sections, getCard, resetSRS }) {
+    const { theme } = useApp();
     const today = new Date().toISOString().split("T")[0];
 
     let total = 0, seen = 0, due = 0, mastered = 0;

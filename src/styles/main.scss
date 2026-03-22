@@ -1,0 +1,27 @@
+// ─────────────────────────────────────────────────────────────
+// main.scss — entry point, imports all partials
+// ─────────────────────────────────────────────────────────────
+
+// Abstracts (variables + mixins, no output)
+@use 'abstracts/variables' as *;
+@use 'abstracts/mixins'    as *;
+
+// Base
+@use 'base/reset';
+@use 'base/typography';
+@use 'base/animations';
+
+// Layout
+@use 'layout/app';
+@use 'layout/topbar';
+@use 'layout/bottom-nav';
+
+// Components
+@use 'components/buttons';
+@use 'components/forms';
+@use 'components/badges';
+@use 'components/cours';
+@use 'components/quiz';
+@use 'components/install-banner';
+@use 'components/splash';
+@use 'components/home';

@@ -1,0 +1,71 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.splash {
+  position: fixed;
+  inset: 0;
+  z-index: $z-splash;
+  background: var(--bg);
+  @include flex-center;
+  flex-direction: column;
+  animation: fadeIn 0.2s $ease both;
+
+  &--exit { animation: splashOut 0.6s $ease forwards; pointer-events: none; }
+}
+
+.splash__inner {
+  @include flex-col($sp-5);
+  align-items: center;
+  animation: splashLogoIn 0.5s $ease-spring both;
+  animation-delay: 0.1s;
+}
+
+.splash__logo {
+  width: clamp(64px, 8vw, 80px);
+  height: clamp(64px, 8vw, 80px);
+  border-radius: $r-xl;
+  background: linear-gradient(135deg, var(--brand-start), var(--brand-end));
+  @include flex-center;
+  box-shadow: 0 12px 40px color-mix(in srgb, var(--brand-start) 30%, transparent);
+
+  svg { width: clamp(30px, 4vw, 38px); height: clamp(30px, 4vw, 38px); color: #fff; }
+}
+
+.splash__name {
+  font-family: $f-display;
+  font-weight: 800;
+  font-size: $fs-3xl;
+  color: var(--text);
+  letter-spacing: -0.5px;
+  line-height: 1;
+}
+
+.splash__tagline {
+  font-family: $f-body;
+  font-size: $fs-base;
+  color: var(--text-muted);
+  letter-spacing: 0.3px;
+  margin-top: -8px;
+}
+
+.splash__bar {
+  width: clamp(120px, 15vw, 180px);
+  height: 3px;
+  border-radius: $r-full;
+  background: var(--border-2);
+  overflow: hidden;
+  animation: splashBarIn 0.4s $ease both;
+  animation-delay: 0.3s;
+}
+
+.splash__bar-fill {
+  height: 100%;
+  border-radius: $r-full;
+  background: linear-gradient(90deg, var(--brand-start), var(--brand-end));
+  width: 0%;
+  animation: barGrow 2.5s $ease-out forwards;
+  animation-delay: 0.4s;
+  transform-origin: left;
+
+  &--done { width: 100%; animation: none; }
+}

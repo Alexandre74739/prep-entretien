@@ -1,0 +1,114 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.topbar {
+  height: $topbar-h;
+  display: flex;
+  align-items: center;
+  gap: $sp-3;
+  padding: 0 $sp-5;
+  position: sticky;
+  top: 0;
+  z-index: $z-topbar;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+}
+
+// ── Logo (home view) ──────────────────────────────────────────
+.topbar-logo {
+  display: flex;
+  align-items: center;
+  gap: $sp-3;
+
+  &__icon {
+    width: 32px; height: 32px;
+    border-radius: $r-sm;
+    background: linear-gradient(135deg, var(--brand-start), var(--brand-end));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    flex-shrink: 0;
+    svg { width: 16px; height: 16px; }
+  }
+
+  &__title {
+    font-family: $f-display;
+    font-weight: 800;
+    font-size: $fs-md;
+    color: var(--text);
+    letter-spacing: 0.3px;
+  }
+}
+
+// ── Back button ───────────────────────────────────────────────
+.topbar-back {
+  width: 34px; height: 34px;
+  border-radius: $r-full;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  @include transition(all, $t-fast);
+  @include focus-ring;
+  svg { width: 18px; height: 18px; }
+  &:hover { background: var(--surface-hover); border-color: var(--border-active); }
+}
+
+// ── Section detail header ─────────────────────────────────────
+.topbar-detail-info {
+  display: flex;
+  align-items: center;
+  gap: $sp-2;
+}
+
+.topbar-detail-icon {
+  font-size: clamp(16px, 1.8vw, 18px);
+  line-height: 1;
+}
+
+.topbar-detail-name {
+  font-family: $f-display;
+  font-weight: 700;
+  font-size: $fs-md;
+  color: var(--text);
+}
+
+// ── Screen title ──────────────────────────────────────────────
+.topbar-screen-icon {
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  svg { width: 18px; height: 18px; }
+}
+
+.topbar-screen-title {
+  font-family: $f-display;
+  font-weight: 800;
+  font-size: $fs-md;
+  color: var(--text);
+}
+
+.topbar-spacer { flex: 1; }
+
+// ── Theme toggle ──────────────────────────────────────────────
+.topbar-theme-btn {
+  width: 34px; height: 34px;
+  border-radius: $r-sm;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-sub);
+  flex-shrink: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  @include transition(all, $t-fast);
+  @include focus-ring;
+  svg { width: 16px; height: 16px; }
+  &:hover { background: var(--surface-hover); color: var(--accent); border-color: var(--border-active); }
+}

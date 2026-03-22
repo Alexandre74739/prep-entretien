@@ -5,12 +5,14 @@
 // le contexte et sauvegardées séparément dans localStorage.
 // ─────────────────────────────────────────────────────────────
 
+// icon = classe Devicon (ex: "devicon-html5-plain colored")
+// color est conservé pour compatibilité API mais ignoré en UI (accent unifié)
 export const BASE_SECTIONS = [
   {
     id: "htmlcss",
     label: "HTML / CSS",
-    icon: "🎨",
-    color: "#f97316",
+    icon: "devicon-html5-plain colored",
+    color: "#7c3aed",
     content: [
       {
         q: "Différences entre position: static, relative, absolute, fixed, sticky",
@@ -108,8 +110,8 @@ Reset standard :
   {
     id: "js",
     label: "JavaScript / TS",
-    icon: "⚡",
-    color: "#eab308",
+    icon: "devicon-javascript-plain colored",
+    color: "#7c3aed",
     content: [
       {
         q: "Que font async, await, try et catch ?",
@@ -223,8 +225,8 @@ C'est la base de useState, useEffect et du module pattern.`,
   {
     id: "react",
     label: "React",
-    icon: "⚛️",
-    color: "#38bdf8",
+    icon: "devicon-react-original colored",
+    color: "#7c3aed",
     content: [
       {
         q: "Différences entre hooks et props",
@@ -353,8 +355,8 @@ besoin de devtools.
   {
     id: "sql",
     label: "SQL / BDD",
-    icon: "🗄️",
-    color: "#34d399",
+    icon: "devicon-postgresql-plain colored",
+    color: "#7c3aed",
     content: [
       {
         q: "Types de JOIN et leurs différences",
@@ -474,8 +476,8 @@ Pas de meilleur absolu : dépend du use case.`,
   {
     id: "git",
     label: "Git / GitHub",
-    icon: "🐙",
-    color: "#a78bfa",
+    icon: "devicon-git-plain colored",
+    color: "#7c3aed",
     content: [
       {
         q: "git merge vs git rebase",
@@ -591,8 +593,8 @@ Mentionner CI/CD en entretien = culture DevOps et qualité.`,
   {
     id: "docker",
     label: "Docker / PHP",
-    icon: "🐳",
-    color: "#60a5fa",
+    icon: "devicon-docker-plain colored",
+    color: "#7c3aed",
     content: [
       {
         q: "Image Docker vs Container",

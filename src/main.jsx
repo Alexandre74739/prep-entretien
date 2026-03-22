@@ -1,4 +1,5 @@
 import { StrictMode } from "react";
+import "./styles/main.scss";
 import { createRoot } from "react-dom/client";
 import { AppProvider } from "./context/AppContext";
 import App from "./App.jsx";

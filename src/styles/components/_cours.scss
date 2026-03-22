@@ -1,0 +1,146 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.cours-list { @include flex-col($sp-3); }
+
+// ── Card ──────────────────────────────────────────────────────
+.cours-card {
+  border-radius: $r-lg;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  @include transition(border-color box-shadow, $t-base);
+
+  &:hover { border-color: var(--border-2); box-shadow: var(--shadow-md); }
+
+  &.is-open {
+    border-color: color-mix(in srgb, var(--accent) 35%, transparent);
+    box-shadow: var(--shadow-md);
+  }
+}
+
+.cours-card__header {
+  width: 100%;
+  @include flex-row($sp-4);
+  padding: clamp(12px, 1.4vw, 16px) clamp(14px, 1.6vw, 18px);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-family: $f-body;
+  align-items: flex-start;
+  @include focus-ring;
+
+  &:hover .cours-card__num:not(.cours-card__num--open) {
+    background: var(--surface-hover);
+    border-color: var(--border-active);
+  }
+}
+
+.cours-card__num {
+  flex-shrink: 0;
+  width: clamp(24px, 2.4vw, 28px);
+  height: clamp(24px, 2.4vw, 28px);
+  border-radius: $r-sm;
+  background: var(--surface-2);
+  border: 1px solid var(--border-2);
+  color: var(--text-muted);
+  font-size: $fs-sm;
+  font-weight: 700;
+  @include flex-center;
+  @include transition(all, $t-base);
+  margin-top: 1px;
+  font-family: $f-display;
+
+  &--open {
+    background: var(--accent);
+    border-color: transparent;
+    color: #fff;
+  }
+}
+
+.cours-card__content  { flex: 1; min-width: 0; }
+.cours-card__meta     { @include flex-row($sp-2); margin-bottom: $sp-2; flex-wrap: wrap; }
+
+.cours-card__question {
+  font-size: $fs-base;
+  font-weight: 500;
+  line-height: 1.6;
+  color: var(--text);
+  text-align: left;
+}
+
+.cours-card__chevron {
+  flex-shrink: 0;
+  color: var(--text-muted);
+  font-size: $fs-xs;
+  margin-top: 5px;
+  @include transition(transform, $t-base);
+
+  .is-open & { transform: rotate(180deg); color: var(--accent); }
+}
+
+.cours-card__body {
+  padding: 0 clamp(14px, 1.6vw, 18px) clamp(14px, 1.6vw, 18px);
+  border-top: 1px solid var(--border);
+}
+
+.cours-card__answer {
+  margin-top: $sp-4;
+  white-space: pre-wrap;
+  font-family: $f-mono;
+  font-size: $fs-sm;
+  line-height: 1.95;
+  padding: $sp-4 $sp-5;
+  background: var(--code-bg);
+  border-radius: $r-md;
+  border: 1px solid var(--border);
+  color: var(--text-sub);
+}
+
+.cours-card__actions { @include flex-row($sp-2); margin-top: $sp-4; }
+.cours-edit          { margin-top: $sp-4; @include flex-col($sp-3); }
+.cours-edit__actions { @include flex-row($sp-2); }
+
+// ── Syntax highlighting ───────────────────────────────────────
+.ans-keyword { color: var(--accent); font-weight: 600; }
+.ans-comment { color: var(--text-muted); font-style: italic; }
+.ans-arrow   { color: var(--violet, #a78bfa); }
+.ans-warn    { color: var(--warning); }
+.ans-default { color: var(--text-sub); }
+
+// ── Empty state ───────────────────────────────────────────────
+.empty-state {
+  text-align: center;
+  padding: clamp(48px, 6vw, 72px) $sp-6;
+  background: var(--surface);
+  border-radius: $r-xl;
+  border: 1px dashed var(--border-2);
+  @include flex-col($sp-4);
+  align-items: center;
+
+  &__icon {
+    width: clamp(48px, 5vw, 60px);
+    height: clamp(48px, 5vw, 60px);
+    border-radius: $r-xl;
+    background: color-mix(in srgb, var(--accent) 10%, var(--surface-2));
+    border: 1px solid color-mix(in srgb, var(--accent) 20%, transparent);
+    @include flex-center;
+    svg { width: 24px; height: 24px; color: var(--accent); }
+  }
+
+  &__title {
+    font-family: $f-display;
+    font-weight: 700;
+    font-size: $fs-lg;
+    color: var(--text-sub);
+  }
+
+  &__desc {
+    font-size: $fs-base;
+    color: var(--text-muted);
+    font-family: $f-body;
+    strong { color: var(--accent); }
+  }
+}

@@ -1,0 +1,89 @@
+@use 'variables' as *;
+
+// ── Flex helpers ──────────────────────────────────────────────
+@mixin flex-center {
+  display: flex; align-items: center; justify-content: center;
+}
+@mixin flex-row($gap: $sp-2) {
+  display: flex; align-items: center; gap: $gap;
+}
+@mixin flex-col($gap: $sp-3) {
+  display: flex; flex-direction: column; gap: $gap;
+}
+
+// ── Card surface ──────────────────────────────────────────────
+@mixin card($r: $r-lg) {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: $r;
+  box-shadow: var(--shadow-sm);
+}
+
+// ── Topbar surface ────────────────────────────────────────────
+@mixin topbar-surface {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+}
+
+// ── Accent border (left stripe) ───────────────────────────────
+@mixin accent-stripe($color: var(--accent, #f5c400)) {
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 15%; bottom: 15%;
+    width: 2px;
+    border-radius: 0 2px 2px 0;
+    background: $color;
+  }
+}
+
+// ── Typography ───────────────────────────────────────────────
+@mixin label-micro {
+  font-family: $f-display;
+  font-size: $fs-xs;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+@mixin text-gradient($from: var(--brand-start), $to: var(--brand-end)) {
+  background: linear-gradient(100deg, $from, $to);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+// ── Transitions ──────────────────────────────────────────────
+@mixin transition($props: all, $dur: $t-base) {
+  transition: $props $dur $ease;
+}
+
+// ── Focus ring ───────────────────────────────────────────────
+@mixin focus-ring($color: var(--accent, #f5c400)) {
+  &:focus-visible {
+    outline: 2px solid $color;
+    outline-offset: 2px;
+  }
+}
+
+// ── Scrollbar ────────────────────────────────────────────────
+@mixin scrollbar {
+  &::-webkit-scrollbar { width: 4px; height: 4px; }
+  &::-webkit-scrollbar-track { background: transparent; }
+  &::-webkit-scrollbar-thumb {
+    background: var(--scrollbar);
+    border-radius: $r-full;
+    &:hover { background: var(--border-active); }
+  }
+}
+
+// ── Truncate ─────────────────────────────────────────────────
+@mixin truncate {
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+
+// ── Breakpoints ──────────────────────────────────────────────
+@mixin mobile  { @media (max-width: 767px)  { @content; } }
+@mixin desktop { @media (min-width: 768px)  { @content; } }
+@mixin wide    { @media (min-width: 1200px) { @content; } }
