@@ -29,7 +29,7 @@
   &:hover:not(:disabled) {
     filter: brightness(1.12);
     transform: translateY(-1px);
-    box-shadow: 0 4px 16px color-mix(in srgb, var(--accent) 35%, transparent);
+    box-shadow: 0 2px 8px color-mix(in srgb, var(--accent) 45%, transparent);
   }
   &:active:not(:disabled) { transform: translateY(0); filter: brightness(0.95); }
 }

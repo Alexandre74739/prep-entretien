@@ -559,7 +559,7 @@
     &:hover {
       transform: translateY(-2px);
       filter: brightness(1.1);
-      box-shadow: 0 6px 22px color-mix(in srgb, var(--accent) 45%, transparent);
+      box-shadow: 0 2px 8px color-mix(in srgb, var(--accent) 45%, transparent);
     }
   }
 

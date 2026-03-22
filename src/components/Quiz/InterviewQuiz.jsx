@@ -48,7 +48,7 @@ export default function InterviewQuiz() {
         <p className="interview-hero__desc">
           Simule un vrai entretien technique.{" "}
           <strong>10 questions</strong> tirées aléatoirement parmi{" "}
-          <strong>toutes les sections</strong> — HTML, CSS, JS, React, SQL, Git, Docker…
+          <strong>toutes les sections</strong> : HTML, CSS, JS, React, SQL, Git, Docker…
           <br />Tu réponds à tout, puis tu vois la correction complète.
         </p>
 
@@ -70,7 +70,7 @@ export default function InterviewQuiz() {
           {sections.filter((s) => s.quiz.length > 0).map((s) => (
             <span key={s.id} className="badge badge--custom">
               <i className={s.icon} />
-              {s.label} · {s.quiz.length}
+              {s.label}
             </span>
           ))}
         </div>
