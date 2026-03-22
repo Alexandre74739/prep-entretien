@@ -173,6 +173,11 @@ function AboutSection() {
 // ── HomeScreen ──────────────────────────────────────────────────
 export default function HomeScreen({ onSelectSection, onGoToSections }) {
   const { sections } = useApp();
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const filteredSections = sections.filter((s) =>
+    s.label.toLowerCase().includes(searchQuery.toLowerCase())
+  );
   const featured = getDailySection(sections);
 
   const totalQuestions = sections.reduce((sum, s) => sum + s.content.length, 0);
@@ -184,18 +189,46 @@ export default function HomeScreen({ onSelectSection, onGoToSections }) {
       {/* Search bar */}
       <div className="home-search">
         <span className="home-search__icon"><IconSearch /></span>
-        <span className="home-search__placeholder">Rechercher une section…</span>
+        <input
+          type="text"
+          className="home-search__input"
+          placeholder="Rechercher une section..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          style={{
+            background: "transparent",
+            border: "none",
+            color: "inherit",
+            outline: "none",
+            width: "100%",
+            padding: "0 10px"
+          }}
+        />
+        {searchQuery && (
+          <button
+            onClick={() => setSearchQuery("")}
+            style={{ background: "transparent", border: "none", color: "gray", cursor: "pointer" }}
+          >
+            ✕
+          </button>
+        )}
         <button className="home-search__filter" aria-label="Filtres"><IconSliders /></button>
       </div>
 
       {/* Category chips — quick access */}
       <div className="home-chips">
-        {sections.map((s) => (
-          <button key={s.id} className="home-chip" onClick={() => onSelectSection(s)}>
-            <i className={s.icon} />
-            <span>{s.label.split(" /")[0]}</span>
-          </button>
-        ))}
+        {filteredSections.length > 0 ? (
+          filteredSections.map((s) => (
+            <button key={s.id} className="home-chip" onClick={() => onSelectSection(s)}>
+              <i className={s.icon} />
+              <span>{s.label}</span>
+            </button>
+          ))
+        ) : (
+          <p style={{ padding: "10px", fontSize: "0.9rem", opacity: 0.7 }}>
+            Aucun résultat pour "{searchQuery}"
+          </p>
+        )}
       </div>
 
       {/* Featured card — section du jour */}
