@@ -15,7 +15,7 @@ export default function Topbar({ view, activeSection, onBack }) {
       <header className="topbar topbar--home">
         <div className="topbar-logo">
           <div className="topbar-logo__icon"><IconBriefcase /></div>
-          <div className="topbar-logo__title">PrepCode</div>
+          <div className="topbar-logo__title">Prep Entretien</div>
         </div>
         <div className="topbar-spacer" />
         {themeBtn}

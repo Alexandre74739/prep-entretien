@@ -184,6 +184,13 @@
     width: fit-content;
     box-shadow: 0 4px 16px rgba(0,0,0,0.15);
     svg { width: 14px; height: 14px; }
+    @include transition(all, $t-fast);
+    @include focus-ring;
+
+    &:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 2px 8px color-mix(in srgb, var(--accent) 45%, transparent);        
+    }
   }
 }
 
@@ -492,7 +499,7 @@
   &__digits {
     font-family: $f-display;
     font-weight: 800;
-    font-size: clamp(28px, 4vw, 36px);
+    font-size: clamp(16px, 4vw, 28px);
     color: var(--text);
     letter-spacing: -1px;
     line-height: 1;
@@ -522,7 +529,8 @@
     @include transition(all, $t-fast);
 
     &--reset {
-      width: 40px; height: 40px;
+      width: 48px; 
+      height: 48px;
       border-radius: $r-full;
       background: var(--surface-2);
       color: var(--text-muted);
@@ -531,7 +539,8 @@
     }
 
     &--play {
-      width: 56px; height: 56px;
+      width: 48px;
+      height: 48px;
       border-radius: $r-full;
       background: var(--accent);
       color: #fff;
@@ -663,5 +672,11 @@
     font-size: $fs-xs;
     font-weight: 700;
     font-family: $f-body;
+    @include transition(all, $t-fast);
+      @include focus-ring;
+    
+      &:hover:not(:disabled) {
+        transform: translateY(-2px);
+      }
   }
 }

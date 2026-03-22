@@ -27,7 +27,7 @@ export default function SplashScreen() {
         <div className="splash__logo">
           <IconBriefcase />
         </div>
-        <div className="splash__name">PrepCode</div>
+        <div className="splash__name">Prep Entretien</div>
         <div className="splash__tagline">Préparez votre entretien</div>
         <div className="splash__bar">
           <div className={`splash__bar-fill${!loading ? " splash__bar-fill--done" : ""}`} />

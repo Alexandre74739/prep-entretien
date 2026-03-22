@@ -127,7 +127,7 @@ function AboutSection() {
     <div className="about">
       <div className="about__header">
         <span className="about__header-icon"><IconUser /></span>
-        <span className="about__header-title">À propos</span>
+        <span className="about__header-title">A propos</span>
       </div>
 
       <div className="about__card">
@@ -136,7 +136,7 @@ function AboutSection() {
         </div>
         <div className="about__identity">
           <div className="about__name">Développeur Web</div>
-          <div className="about__role">Bachelor 3 · Alternance</div>
+          <div className="about__role">PEREZ Alexandre-Philippe</div>
         </div>
       </div>
 

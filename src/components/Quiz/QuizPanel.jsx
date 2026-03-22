@@ -31,7 +31,7 @@ function Menu({ section, onStart }) {
       lines: ["5 questions aléatoires en QCM", "Tu réponds, puis tu vois la correction à la fin", "Score + feedback + bouton continuer"],
       badge: `${section.quiz.length} QCM dispo`,
       disabled: section.quiz.length === 0,
-      disabledMsg: "Aucun QCM dans cette section — ajoute-en via ＋ Ajouter",
+      disabledMsg: "Aucun QCM dans cette section : ajoute-en via ＋ Ajouter",
     },
     {
       id: "reveal",
@@ -47,7 +47,7 @@ function Menu({ section, onStart }) {
       icon: <IconZap />,
       title: "Quiz adaptatif",
       lines: ["5 questions choisies selon ton niveau", "Priorise celles que tu maîtrises moins bien", "Score + feedback + répétition espacée"],
-      badge: "Répétition espacée",
+      badge: "Répétitions",
       disabled: section.quiz.length === 0,
       disabledMsg: "Aucun QCM dans cette section — ajoute-en via ＋ Ajouter",
     },

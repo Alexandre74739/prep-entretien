@@ -96,13 +96,13 @@ export default function CoursList({ section }) {
                           className="btn btn--outline"
                           onClick={() => { setEditing(item.id); setEditForm({ question: item.q, answer: item.a }); }}
                         >
-                          ✏️ Modifier
+                          Modifier
                         </button>
                         <button
                           className="btn btn--danger"
                           onClick={() => handleDelete(section.id, item.id)}
                         >
-                          🗑 Supprimer
+                          Supprimer
                         </button>
                       </div>
                     )}
@@ -126,7 +126,7 @@ export default function CoursList({ section }) {
                         onClick={() => saveEdit(section.id, item.id)}
                         disabled={saving}
                       >
-                        {saving ? "…" : "💾 Sauvegarder"}
+                        {saving ? "…" : "Sauvegarder"}
                       </button>
                       <button
                         className="btn btn--outline"
