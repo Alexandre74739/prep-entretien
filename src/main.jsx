@@ -11,7 +11,23 @@ if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
     navigator.serviceWorker
       .register("/sw.js")
-      .then((reg) => console.log("✅ SW enregistré :", reg.scope))
+      .then((reg) => {
+        console.log("✅ SW enregistré :", reg.scope);
+
+        // Détecte les mises à jour en attente
+        reg.onupdatefound = () => {
+          const installingWorker = reg.installing;
+          installingWorker.onstatechange = () => {
+            if (installingWorker.state === "installed") {
+              if (navigator.serviceWorker.controller) {
+                // Une nouvelle version est là ! On force le reload.
+                console.log("Nouvelle DA détectée, mise à jour...");
+                window.location.reload();
+              }
+            }
+          };
+        };
+      })
       .catch((err) => console.warn("⚠️ SW non enregistré :", err));
   });
 }
