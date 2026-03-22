@@ -11,6 +11,7 @@
   align-items: center;
   justify-content: space-around;
   z-index: $z-bottom-nav;
+  isolation: isolate;
   padding-bottom: env(safe-area-inset-bottom, 0px);
   box-shadow: 0 -4px 20px rgba(120,90,210,0.06);
 

@@ -1,7 +1,7 @@
 @use '../abstracts/variables' as *;
 @use '../abstracts/mixins' as *;
 
-.quiz-panel { max-width: 640px; }
+.quiz-panel { width: 100%; }
 
 // ── Intro ─────────────────────────────────────────────────────
 .quiz-intro {
@@ -366,15 +366,16 @@
   @include flex-row($sp-5);
   align-items: center;
 
-  &__emoji {
+  &__icon {
     width: clamp(52px, 6vw, 64px);
     height: clamp(52px, 6vw, 64px);
     border-radius: $r-xl;
     background: color-mix(in srgb, var(--score-color, #16a34a) 12%, var(--surface-2));
     border: 1px solid color-mix(in srgb, var(--score-color, #16a34a) 22%, transparent);
     @include flex-center;
-    font-size: clamp(26px, 3vw, 32px);
+    color: var(--score-color, #16a34a);
     flex-shrink: 0;
+    svg { width: 28px; height: 28px; }
   }
 
   &__info  { flex: 1; }

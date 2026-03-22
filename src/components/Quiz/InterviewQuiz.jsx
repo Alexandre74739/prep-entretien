@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useApp } from "../../context/AppContext";
+import { IconMic, IconTrophy, IconCheck } from "../ui/Icon";
 
 function shuffle(arr) {
   const a = [...arr];
@@ -14,7 +15,7 @@ export default function InterviewQuiz() {
   const { sections } = useApp();
 
   const allQcm = sections.flatMap((s) =>
-    s.quiz.map((q) => ({ ...q, sectionLabel: s.label, sectionIcon: s.icon, sectionColor: s.color }))
+    s.quiz.map((q) => ({ ...q, sectionLabel: s.label, sectionIcon: s.icon }))
   );
 
   const pick10 = () => shuffle(allQcm).slice(0, Math.min(10, allQcm.length));
@@ -28,7 +29,6 @@ export default function InterviewQuiz() {
   const score    = questions.filter((q, i) => answers[i] === q.answer).length;
   const ratio    = questions.length > 0 ? score / questions.length : 0;
   const hexColor = ratio >= 0.8 ? "#22c55e" : ratio >= 0.6 ? "#f59e0b" : "#ef4444";
-  const emoji    = ratio >= 0.8 ? "🏆" : ratio >= 0.6 ? "📈" : "💪";
   const msg      = ratio >= 0.8 ? "Excellent ! Tu es prêt(e) pour l'entretien."
                  : ratio >= 0.6 ? "Bonne base ! Relis les points en rouge."
                  : "Continue à t'entraîner, tu vas y arriver !";
@@ -43,10 +43,7 @@ export default function InterviewQuiz() {
   if (!started) return (
     <div className="quiz-panel">
       <div className="interview-hero">
-        <div className="interview-hero__deco-1" />
-        <div className="interview-hero__deco-2" />
-
-        <div className="interview-hero__icon">🎤</div>
+        <div className="interview-hero__icon"><IconMic /></div>
         <h2 className="interview-hero__title">Quiz Entretien</h2>
         <p className="interview-hero__desc">
           Simule un vrai entretien technique.{" "}
@@ -57,19 +54,12 @@ export default function InterviewQuiz() {
 
         <div className="interview-hero__stats">
           {[
-            { label: "Questions",  value: Math.min(10, allQcm.length), color: "#f59e0b" },
-            { label: "Sections",   value: sections.filter((s) => s.quiz.length > 0).length, color: "#38bdf8" },
-            { label: "QCM dispo",  value: allQcm.length, color: "#818cf8" },
-          ].map(({ label, value, color }) => (
-            <div
-              key={label}
-              className="stat-badge"
-              style={{
-                background: `color-mix(in srgb, ${color} 12%, transparent)`,
-                borderColor: `color-mix(in srgb, ${color} 35%, transparent)`,
-              }}
-            >
-              <span className="stat-badge__value" style={{ color }}>{value}</span>
+            { label: "Questions", value: Math.min(10, allQcm.length) },
+            { label: "Sections",  value: sections.filter((s) => s.quiz.length > 0).length },
+            { label: "QCM dispo", value: allQcm.length },
+          ].map(({ label, value }) => (
+            <div key={label} className="stat-badge">
+              <span className="stat-badge__value">{value}</span>
               <span className="stat-badge__label">{label}</span>
             </div>
           ))}
@@ -78,16 +68,9 @@ export default function InterviewQuiz() {
         <div className="interview-hero__sections-label">Sections incluses</div>
         <div className="interview-hero__sections">
           {sections.filter((s) => s.quiz.length > 0).map((s) => (
-            <span
-              key={s.id}
-              className="badge"
-              style={{
-                background: `color-mix(in srgb, ${s.color} 14%, transparent)`,
-                borderColor: `color-mix(in srgb, ${s.color} 35%, transparent)`,
-                color: s.color,
-              }}
-            >
-              {s.icon} {s.label} · {s.quiz.length}
+            <span key={s.id} className="badge badge--custom">
+              <i className={s.icon} />
+              {s.label} · {s.quiz.length}
             </span>
           ))}
         </div>
@@ -108,9 +91,11 @@ export default function InterviewQuiz() {
 
   // ── Feedback ───────────────────────────────────────────────
   if (submitted) return (
-    <div className="quiz-panel" style={{ "--accent": "#f59e0b" }}>
+    <div className="quiz-panel">
       <div className="feedback-score" style={{ "--score-color": hexColor, color: hexColor }}>
-        <span className="feedback-score__emoji">{emoji}</span>
+        <span className="feedback-score__icon">
+          {ratio >= 0.8 ? <IconTrophy /> : <IconCheck />}
+        </span>
         <div className="feedback-score__info">
           <div className="feedback-score__value">{score} / {questions.length}</div>
           <div className="feedback-score__msg">{msg}</div>
@@ -133,15 +118,9 @@ export default function InterviewQuiz() {
           const ok  = sel === q.answer;
           return (
             <div key={i} className={`feedback-item feedback-item--${ok ? "ok" : "wrong"}`}>
-              <div className="feedback-item__section-badge"
-                style={{
-                  background: `color-mix(in srgb, ${q.sectionColor} 18%, transparent)`,
-                  borderColor: `color-mix(in srgb, ${q.sectionColor} 35%, transparent)`,
-                  color: q.sectionColor,
-                  border: "1px solid",
-                }}
-              >
-                {q.sectionIcon} {q.sectionLabel}
+              <div className="feedback-item__section-badge">
+                <i className={q.sectionIcon} />
+                {q.sectionLabel}
               </div>
 
               <div className="feedback-item__header">
@@ -156,16 +135,14 @@ export default function InterviewQuiz() {
                 </div>
               )}
 
-              <div className="feedback-item__explanation">
-                💡 {q.explanation}
-              </div>
+              <div className="feedback-item__explanation">{q.explanation}</div>
             </div>
           );
         })}
       </div>
 
       <div className="quiz-actions">
-        <button className="btn btn--primary" onClick={continuer}>▶ Continuer</button>
+        <button className="btn btn--primary" onClick={continuer}>Continuer →</button>
         <button className="btn btn--outline" onClick={() => { setStarted(false); setAnswers({}); setSubmitted(false); }}>
           ← Menu
         </button>
@@ -175,11 +152,11 @@ export default function InterviewQuiz() {
 
   // ── Questions ──────────────────────────────────────────────
   return (
-    <div className="quiz-panel" style={{ "--accent": "#f59e0b" }}>
+    <div className="quiz-panel">
       <div className="quiz-header">
         <button className="btn--back" onClick={() => setStarted(false)}>← Menu</button>
         <div className="quiz-header__info">
-          <div className="quiz-header__title">🎤 Quiz Entretien</div>
+          <div className="quiz-header__title">Quiz Entretien</div>
           <div className="quiz-header__sub">Toutes sections · {questions.length} questions</div>
         </div>
       </div>
@@ -195,15 +172,9 @@ export default function InterviewQuiz() {
           const sel = answers[i];
           return (
             <div key={i} className={`question-card${sel !== undefined ? " has-answer" : ""}`}>
-              <span
-                className="question-card__section-badge"
-                style={{
-                  background: `color-mix(in srgb, ${q.sectionColor} 16%, transparent)`,
-                  border: `1px solid color-mix(in srgb, ${q.sectionColor} 35%, transparent)`,
-                  color: q.sectionColor,
-                }}
-              >
-                {q.sectionIcon} {q.sectionLabel}
+              <span className="question-card__section-badge">
+                <i className={q.sectionIcon} />
+                {q.sectionLabel}
               </span>
 
               <div className="question-card__header">

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useApp } from "../../context/AppContext";
+import { IconInbox, IconDownload, IconZap, IconCheck, IconX } from "../ui/Icon";
 
 const EMPTY = {
   question: "", answer: "",
@@ -20,20 +21,18 @@ export default function AddForm({ currentSectionId, onSectionCreated }) {
   const { sections, addQuestion, addSection } = useApp();
   const [target, setTarget] = useState(currentSectionId);
   const [isNew, setIsNew]   = useState(false);
-  const [newSec, setNewSec] = useState({ label: "", icon: "📝", color: "#f472b6" });
+  const [newSec, setNewSec] = useState({ label: "", icon: "devicon-react-original colored" });
   const [form, setForm]     = useState(EMPTY);
-  const [msg, setMsg]       = useState("");
+  const [msg, setMsg]       = useState(null); // { type: 'success'|'error', text: string }
   const [copied, setCopied] = useState(false);
-
-  const accent = sections.find((s) => s.id === target)?.color || "#38bdf8";
 
   async function submit() {
     if (!form.question.trim() || !form.answer.trim()) {
-      setMsg("⚠️ Question et réponse obligatoires."); return;
+      setMsg({ type: "error", text: "Question et réponse obligatoires." }); return;
     }
     let sectionId = target;
     if (isNew) {
-      if (!newSec.label.trim()) { setMsg("⚠️ Donne un nom à la section."); return; }
+      if (!newSec.label.trim()) { setMsg({ type: "error", text: "Donne un nom à la section." }); return; }
       sectionId = await addSection(newSec);
       setIsNew(false);
       onSectionCreated?.(sectionId);
@@ -43,17 +42,20 @@ export default function AddForm({ currentSectionId, onSectionCreated }) {
       : null;
 
     await addQuestion({ sectionId, question: form.question.trim(), answer: form.answer.trim(), quizItem });
-    setMsg("✅ Question sauvegardée !");
+    setMsg({ type: "success", text: "Question sauvegardée !" });
     setForm(EMPTY);
-    setTimeout(() => setMsg(""), 3000);
+    setTimeout(() => setMsg(null), 3000);
   }
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 16, maxWidth: 680, "--accent": accent }}>
+    <div className="add-form">
 
       {/* Intro */}
-      <div className="form-intro">
-        📌 Colle ici une question depuis une IA ou tes notes. Elle sera sauvegardée dans Supabase et visible partout.
+      <div className="add-form__intro">
+        <div className="add-form__intro-icon"><IconInbox /></div>
+        <p className="add-form__intro-text">
+          Colle ici une question depuis une IA ou tes notes. Elle sera sauvegardée dans Supabase et visible partout.
+        </p>
       </div>
 
       {/* Section cible */}
@@ -67,7 +69,9 @@ export default function AddForm({ currentSectionId, onSectionCreated }) {
             else { setIsNew(false); setTarget(e.target.value); }
           }}
         >
-          {sections.map((s) => <option key={s.id} value={s.id}>{s.icon} {s.label}</option>)}
+          {sections.map((s) => (
+            <option key={s.id} value={s.id}>{s.label}</option>
+          ))}
           <option value="__new__">＋ Nouvelle section…</option>
         </select>
       </div>
@@ -78,11 +82,6 @@ export default function AddForm({ currentSectionId, onSectionCreated }) {
           <label className="field-label">Nouvelle section</label>
           <div className="new-section-row">
             <input
-              className="field-input field-input--icon"
-              value={newSec.icon}
-              onChange={(e) => setNewSec((s) => ({ ...s, icon: e.target.value }))}
-            />
-            <input
               className="field-input"
               style={{ flex: 1 }}
               value={newSec.label}
@@ -90,10 +89,11 @@ export default function AddForm({ currentSectionId, onSectionCreated }) {
               onChange={(e) => setNewSec((s) => ({ ...s, label: e.target.value }))}
             />
             <input
-              type="color"
-              className="field-input field-input--color"
-              value={newSec.color}
-              onChange={(e) => setNewSec((s) => ({ ...s, color: e.target.value }))}
+              className="field-input"
+              style={{ width: 220 }}
+              value={newSec.icon}
+              placeholder="Classe Devicon (ex: devicon-react-original)"
+              onChange={(e) => setNewSec((s) => ({ ...s, icon: e.target.value }))}
             />
           </div>
         </div>
@@ -136,12 +136,15 @@ export default function AddForm({ currentSectionId, onSectionCreated }) {
       {/* Options QCM */}
       {form.addToQuiz && (
         <div className="qcm-options">
-          <label className="field-label">4 Options — clique ✓ pour marquer la bonne réponse</label>
+          <label className="field-label">4 Options — clique la lettre pour marquer la bonne réponse</label>
           {form.options.map((opt, i) => (
             <div key={i} className="qcm-option-row">
-              <span className={`qcm-letter${form.correct === i ? " is-correct" : ""}`}>
+              <button
+                className={`qcm-letter${form.correct === i ? " is-correct" : ""}`}
+                onClick={() => setForm((f) => ({ ...f, correct: i }))}
+              >
                 {["A","B","C","D"][i]}
-              </span>
+              </button>
               <input
                 className="field-input"
                 style={{ flex: 1 }}
@@ -149,10 +152,6 @@ export default function AddForm({ currentSectionId, onSectionCreated }) {
                 onChange={(e) => setForm((f) => { const o = [...f.options]; o[i] = e.target.value; return { ...f, options: o }; })}
                 placeholder={`Option ${["A","B","C","D"][i]}`}
               />
-              <button
-                className={`qcm-check-btn${form.correct === i ? " is-correct" : ""}`}
-                onClick={() => setForm((f) => ({ ...f, correct: i }))}
-              >✓</button>
             </div>
           ))}
           <div className="form-group" style={{ marginTop: 4 }}>
@@ -168,30 +167,36 @@ export default function AddForm({ currentSectionId, onSectionCreated }) {
       )}
 
       {/* Submit */}
-      <button className="btn--submit" onClick={submit}>
-        💾 Sauvegarder la question
+      <button className="btn btn--primary btn--submit-main" onClick={submit}>
+        <IconDownload />
+        Sauvegarder la question
       </button>
 
       {/* Toast */}
       {msg && (
-        <div className={`form-toast form-toast--${msg.startsWith("✅") ? "success" : "error"}`}>
-          {msg}
+        <div className={`add-form__toast add-form__toast--${msg.type}`}>
+          {msg.type === "success" ? <IconCheck /> : <IconX />}
+          {msg.text}
         </div>
       )}
 
       {/* Prompt IA */}
       <div className="prompt-box">
         <div className="prompt-box__header">
-          <span className="prompt-box__label">💡 Prompt pour générer des questions</span>
+          <div className="prompt-box__label">
+            <IconZap />
+            Prompt pour générer des questions
+          </div>
           <button
             className={`prompt-box__copy${copied ? " is-copied" : ""}`}
             onClick={() => { navigator.clipboard.writeText(PROMPT); setCopied(true); setTimeout(() => setCopied(false), 2000); }}
           >
-            {copied ? "✅ Copié !" : "Copier"}
+            {copied ? <><IconCheck /> Copié</> : "Copier"}
           </button>
         </div>
         <pre className="prompt-box__text">{PROMPT}</pre>
       </div>
+
     </div>
   );
 }

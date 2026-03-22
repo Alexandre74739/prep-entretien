@@ -187,6 +187,78 @@
   }
 }
 
+// ── Stats row ─────────────────────────────────────────────────
+.home-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: $sp-3;
+}
+
+.home-stat {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: $r-xl;
+  padding: $sp-4 $sp-3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $sp-1;
+  box-shadow: var(--shadow-sm);
+
+  &__icon {
+    width: 32px; height: 32px;
+    border-radius: $r-md;
+    background: color-mix(in srgb, var(--accent) 10%, transparent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent);
+    margin-bottom: $sp-1;
+    svg { width: 16px; height: 16px; }
+  }
+
+  &__value {
+    font-family: $f-display;
+    font-weight: 800;
+    font-size: $fs-xl;
+    color: var(--text);
+    line-height: 1;
+  }
+
+  &__label {
+    font-size: $fs-xs;
+    color: var(--text-muted);
+    font-family: $f-body;
+    font-weight: 500;
+  }
+}
+
+// ── Browse button ──────────────────────────────────────────────
+.home-browse-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: $sp-4 $sp-5;
+  background: color-mix(in srgb, var(--accent) 8%, var(--surface));
+  border: 1px solid color-mix(in srgb, var(--accent) 20%, transparent);
+  border-radius: $r-xl;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  color: var(--accent);
+  font-weight: 700;
+  font-size: $fs-base;
+  font-family: $f-display;
+  @include transition(all, $t-fast);
+
+  svg { width: 18px; height: 18px; flex-shrink: 0; }
+
+  &:hover {
+    background: color-mix(in srgb, var(--accent) 14%, var(--surface));
+    transform: translateX(2px);
+  }
+}
+
 // ── Section list header ────────────────────────────────────────
 .home-list-header {
   display: flex;
@@ -304,5 +376,292 @@
     display: flex;
     align-items: center;
     svg { width: 16px; height: 16px; }
+  }
+}
+
+// ── Pomodoro Timer ──────────────────────────────────────────────
+.pomodoro {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: $r-2xl;
+  padding: $sp-5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $sp-4;
+  box-shadow: var(--shadow-sm);
+
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: $sp-2;
+    width: 100%;
+
+    &-icon {
+      display: flex;
+      color: var(--accent);
+      svg { width: 18px; height: 18px; }
+    }
+
+    &-title {
+      font-family: $f-display;
+      font-weight: 800;
+      font-size: $fs-lg;
+      color: var(--text);
+      flex: 1;
+    }
+  }
+
+  &__cycles {
+    font-size: $fs-sm;
+    color: var(--text-muted);
+    font-family: $f-body;
+    font-weight: 600;
+    span { font-weight: 400; }
+  }
+
+  &__mode-tabs {
+    display: flex;
+    gap: $sp-2;
+    background: var(--surface-2);
+    border-radius: $r-full;
+    padding: 3px;
+    width: 100%;
+  }
+
+  &__mode-tab {
+    flex: 1;
+    padding: clamp(6px, 0.7vw, 8px) $sp-3;
+    border-radius: $r-full;
+    border: none;
+    background: transparent;
+    color: var(--text-muted);
+    font-size: $fs-xs;
+    font-weight: 600;
+    font-family: $f-body;
+    cursor: pointer;
+    @include transition(all, $t-fast);
+    white-space: nowrap;
+
+    &--active {
+      background: var(--surface);
+      color: var(--accent);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+    }
+  }
+
+  &__ring-wrap {
+    position: relative;
+    width: clamp(140px, 18vw, 160px);
+    height: clamp(140px, 18vw, 160px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__ring {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+
+  &__ring-track {
+    fill: none;
+    stroke: var(--border);
+    stroke-width: 8;
+  }
+
+  &__ring-progress {
+    fill: none;
+    stroke-width: 8;
+    stroke-linecap: round;
+    @include transition(stroke-dasharray, 0.6s);
+  }
+
+  &__time {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    position: relative;
+    z-index: 1;
+  }
+
+  &__digits {
+    font-family: $f-display;
+    font-weight: 800;
+    font-size: clamp(28px, 4vw, 36px);
+    color: var(--text);
+    letter-spacing: -1px;
+    line-height: 1;
+  }
+
+  &__mode-label {
+    font-size: $fs-xs;
+    color: var(--text-muted);
+    font-family: $f-body;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  &__controls {
+    display: flex;
+    align-items: center;
+    gap: $sp-4;
+  }
+
+  &__btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    cursor: pointer;
+    @include transition(all, $t-fast);
+
+    &--reset {
+      width: 40px; height: 40px;
+      border-radius: $r-full;
+      background: var(--surface-2);
+      color: var(--text-muted);
+      svg { width: 18px; height: 18px; }
+      &:hover { color: var(--text); background: var(--border); }
+    }
+
+    &--play {
+      width: 56px; height: 56px;
+      border-radius: $r-full;
+      background: var(--accent);
+      color: #fff;
+      box-shadow: 0 4px 16px rgba(168,155,242,0.4);
+      svg { width: 22px; height: 22px; }
+      &:hover { transform: scale(1.06); box-shadow: 0 6px 24px rgba(168,155,242,0.5); }
+    }
+  }
+}
+
+// ── About Section ───────────────────────────────────────────────
+.about {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: $r-2xl;
+  padding: $sp-5;
+  display: flex;
+  flex-direction: column;
+  gap: $sp-4;
+  box-shadow: var(--shadow-sm);
+  margin-bottom: $sp-4;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: $sp-2;
+
+    &-icon {
+      display: flex;
+      color: var(--accent);
+      svg { width: 18px; height: 18px; }
+    }
+
+    &-title {
+      font-family: $f-display;
+      font-weight: 800;
+      font-size: $fs-lg;
+      color: var(--text);
+    }
+  }
+
+  &__card {
+    display: flex;
+    align-items: center;
+    gap: $sp-4;
+    padding: $sp-4;
+    background: color-mix(in srgb, var(--accent) 6%, var(--surface));
+    border: 1px solid color-mix(in srgb, var(--accent) 15%, transparent);
+    border-radius: $r-xl;
+  }
+
+  &__avatar {
+    width: 52px; height: 52px;
+    border-radius: $r-full;
+    background: color-mix(in srgb, var(--accent) 12%, transparent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  &__identity { flex: 1; }
+
+  &__name {
+    font-family: $f-display;
+    font-weight: 800;
+    font-size: $fs-base;
+    color: var(--text);
+  }
+
+  &__role {
+    font-size: $fs-sm;
+    color: var(--text-muted);
+    font-family: $f-body;
+    margin-top: 2px;
+  }
+
+  &__quote {
+    margin: 0;
+    padding: $sp-3 $sp-4;
+    border-left: 3px solid var(--accent);
+    background: color-mix(in srgb, var(--accent) 5%, var(--surface));
+    border-radius: 0 $r-md $r-md 0;
+    font-size: $fs-sm;
+    font-style: italic;
+    color: var(--text-sub);
+    font-family: $f-body;
+    line-height: 1.6;
+  }
+
+  &__bio {
+    margin: 0;
+    font-size: $fs-sm;
+    color: var(--text-sub);
+    font-family: $f-body;
+    line-height: 1.7;
+  }
+
+  &__section-title {
+    font-family: $f-display;
+    font-weight: 700;
+    font-size: $fs-sm;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: $sp-1;
+  }
+
+  &__context {
+    margin: 0;
+    font-size: $fs-sm;
+    color: var(--text-sub);
+    font-family: $f-body;
+    line-height: 1.7;
+  }
+
+  &__chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $sp-2;
+  }
+
+  &__chip {
+    padding: clamp(5px, 0.6vw, 7px) $sp-3;
+    border-radius: $r-full;
+    background: color-mix(in srgb, var(--accent) 10%, transparent);
+    border: 1px solid color-mix(in srgb, var(--accent) 20%, transparent);
+    color: var(--accent);
+    font-size: $fs-xs;
+    font-weight: 700;
+    font-family: $f-body;
   }
 }

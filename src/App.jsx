@@ -58,7 +58,10 @@ export default function App() {
       <main className="app-main">
         {view === "home" && (
           <div className="fade-in">
-            <HomeScreen onSelectSection={handleSelectSection} />
+            <HomeScreen
+              onSelectSection={handleSelectSection}
+              onGoToSections={() => { setNavActive("sections"); setView("sections"); }}
+            />
           </div>
         )}
 
@@ -104,13 +107,13 @@ export default function App() {
         )}
 
         {view === "quiz-entretien" && (
-          <div className="fade-in">
+          <div className="fade-in screen-view">
             <InterviewQuiz />
           </div>
         )}
 
         {view === "add" && (
-          <div className="fade-in">
+          <div className="fade-in screen-view">
             <AddForm
               currentSectionId={sections[0]?.id}
               onSectionCreated={(id) => {
@@ -122,7 +125,13 @@ export default function App() {
         )}
       </main>
 
-      <BottomNav active={view === "section-detail" ? navActive : view} onChange={handleNavChange} />
+      <BottomNav
+        active={view === "section-detail"
+          ? navActive
+          : ({ home: "home", sections: "sections", "quiz-entretien": "quiz", add: "add" }[view] ?? view)
+        }
+        onChange={handleNavChange}
+      />
       <InstallBanner />
       <SplashScreen />
     </div>
