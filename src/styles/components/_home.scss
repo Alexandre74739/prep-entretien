@@ -631,7 +631,7 @@
     border-left: 3px solid var(--accent);
     background: color-mix(in srgb, var(--accent) 5%, var(--surface));
     border-radius: 0 $r-md $r-md 0;
-    font-size: $fs-sm;
+    font-size: $fs-base;
     font-style: italic;
     color: var(--text-sub);
     font-family: $f-body;
@@ -640,7 +640,7 @@
 
   &__bio {
     margin: 0;
-    font-size: $fs-sm;
+    font-size: $fs-base;
     color: var(--text-sub);
     font-family: $f-body;
     line-height: 1.7;
@@ -658,7 +658,7 @@
 
   &__context {
     margin: 0;
-    font-size: $fs-sm;
+    font-size: $fs-base;
     color: var(--text-sub);
     font-family: $f-body;
     line-height: 1.7;
