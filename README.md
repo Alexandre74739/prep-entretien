@@ -1,8 +1,8 @@
-# PrepCode
+# Prep Entretien
 
 > Application web de préparation aux entretiens techniques — Bachelor 3 / Alternance
 
-**PrepCode** est une Progressive Web App (PWA) conçue pour réviser efficacement les notions clés du développement web. Elle centralise fiches de cours, quiz adaptatifs et simulation d'entretien dans une interface moderne, installable et fonctionnelle hors ligne.
+**Prep Entretien** est une Progressive Web App (PWA) conçue pour réviser efficacement les notions clés du développement web. Elle centralise fiches de cours, quiz adaptatifs et simulation d'entretien dans une interface moderne, installable et fonctionnelle hors ligne.
 
 ---
 

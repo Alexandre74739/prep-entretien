@@ -101,7 +101,7 @@ export const quizApi = {
       section_id:  row.section_id,
       question:    row.question,
       options:     [row.option_a, row.option_b, row.option_c, row.option_d],
-      answer:      row.answer,
+      answer:      row.correct,
       explanation: row.explanation,
     }));
   },
@@ -116,7 +116,7 @@ export const quizApi = {
         option_b:    options[1],
         option_c:    options[2],
         option_d:    options[3],
-        answer,
+        correct: answer,
         explanation,
       })
       .select()
@@ -134,7 +134,7 @@ export const quizApi = {
         option_b:    options[1],
         option_c:    options[2],
         option_d:    options[3],
-        answer,
+        correct: answer,
         explanation,
       })
       .eq("id", id);

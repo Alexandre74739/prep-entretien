@@ -32,7 +32,7 @@ export default async function handler(req, res) {
       section_id:  item.section_id,
       question:    item.question,
       options:     [item.option_a, item.option_b, item.option_c, item.option_d],
-      answer:      item.correct,
+      answer:      Number(item.correct),
       explanation: item.explanation,
       custom:      true,
     }));
