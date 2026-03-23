@@ -29,7 +29,7 @@ export default defineConfig({
         ],
       },
       manifest: {
-        name: "Prep Entretien — Bachelor 3",
+        name: "Prep Entretien",
         short_name: "Prep Entretien",
         description: "Entraînement technique pour les entretiens d'alternance",
         theme_color: "#0f1117",
