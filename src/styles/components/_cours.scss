@@ -1,9 +1,10 @@
 @use '../abstracts/variables' as *;
 @use '../abstracts/mixins' as *;
 
-.cours-list { @include flex-col($sp-3); }
+.cours-list {
+  @include flex-col($sp-3);
+}
 
-// ── Card ──────────────────────────────────────────────────────
 .cours-card {
   border-radius: $r-lg;
   background: var(--surface);
@@ -12,7 +13,10 @@
   overflow: hidden;
   @include transition(border-color box-shadow, $t-base);
 
-  &:hover { border-color: var(--border-2); box-shadow: var(--shadow-md); }
+  &:hover {
+    border-color: var(--border-2);
+    box-shadow: var(--shadow-md);
+  }
 
   &.is-open {
     border-color: color-mix(in srgb, var(--accent) 35%, transparent);
@@ -60,8 +64,16 @@
   }
 }
 
-.cours-card__content  { flex: 1; min-width: 0; }
-.cours-card__meta     { @include flex-row($sp-2); margin-bottom: $sp-2; flex-wrap: wrap; }
+.cours-card__content {
+  flex: 1;
+  min-width: 0;
+}
+
+.cours-card__meta {
+  @include flex-row($sp-2);
+  margin-bottom: $sp-2;
+  flex-wrap: wrap;
+}
 
 .cours-card__question {
   font-size: $fs-base;
@@ -78,7 +90,10 @@
   margin-top: 5px;
   @include transition(transform, $t-base);
 
-  .is-open & { transform: rotate(180deg); color: var(--accent); }
+  .is-open & {
+    transform: rotate(180deg);
+    color: var(--accent);
+  }
 }
 
 .cours-card__body {
@@ -99,18 +114,42 @@
   color: var(--text-sub);
 }
 
-.cours-card__actions { @include flex-row($sp-2); margin-top: $sp-4; }
-.cours-edit          { margin-top: $sp-4; @include flex-col($sp-3); }
-.cours-edit__actions { @include flex-row($sp-2); }
+.cours-card__actions {
+  @include flex-row($sp-2);
+  margin-top: $sp-4;
+}
 
-// ── Syntax highlighting ───────────────────────────────────────
-.ans-keyword { color: var(--accent); font-weight: 600; }
-.ans-comment { color: var(--text-muted); font-style: italic; }
-.ans-arrow   { color: var(--violet, #a78bfa); }
-.ans-warn    { color: var(--warning); }
-.ans-default { color: var(--text-sub); }
+.cours-edit {
+  margin-top: $sp-4;
+  @include flex-col($sp-3);
+}
 
-// ── Empty state ───────────────────────────────────────────────
+.cours-edit__actions {
+  @include flex-row($sp-2);
+}
+
+.ans-keyword {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.ans-comment {
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.ans-arrow {
+  color: var(--violet, #a78bfa);
+}
+
+.ans-warn {
+  color: var(--warning);
+}
+
+.ans-default {
+  color: var(--text-sub);
+}
+
 .empty-state {
   text-align: center;
   padding: clamp(48px, 6vw, 72px) $sp-6;
@@ -127,7 +166,12 @@
     background: color-mix(in srgb, var(--accent) 10%, var(--surface-2));
     border: 1px solid color-mix(in srgb, var(--accent) 20%, transparent);
     @include flex-center;
-    svg { width: 24px; height: 24px; color: var(--accent); }
+
+    svg {
+      width: 24px;
+      height: 24px;
+      color: var(--accent);
+    }
   }
 
   &__title {
@@ -141,6 +185,9 @@
     font-size: $fs-base;
     color: var(--text-muted);
     font-family: $f-body;
-    strong { color: var(--accent); }
+
+    strong {
+      color: var(--accent);
+    }
   }
 }

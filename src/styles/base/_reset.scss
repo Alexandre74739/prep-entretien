@@ -1,4 +1,6 @@
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -16,7 +18,10 @@ body {
   line-height: 1.5;
 }
 
-button, input, textarea, select {
+button,
+input,
+textarea,
+select {
   font-family: inherit;
   font-size: inherit;
   color: inherit;
@@ -26,12 +31,26 @@ button, input, textarea, select {
   appearance: none;
 }
 
-button { cursor: pointer; }
+button {
+  cursor: pointer;
+}
 
-a { text-decoration: none; color: inherit; }
+a {
+  text-decoration: none;
+  color: inherit;
+}
 
-img, svg { display: block; max-width: 100%; }
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
 
-ul, ol { list-style: none; }
+ul,
+ol {
+  list-style: none;
+}
 
-p { line-height: 1.7; }
+p {
+  line-height: 1.7;
+}

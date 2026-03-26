@@ -17,12 +17,15 @@
   margin-bottom: $sp-2;
   margin-top: $sp-4;
 
-  &:first-child { margin-top: $sp-1; }
+  &:first-child {
+    margin-top: $sp-1;
+  }
 }
 
-.sidebar-items { @include flex-col($sp-1); }
+.sidebar-items {
+  @include flex-col($sp-1);
+}
 
-// ── Nav item ──────────────────────────────────────────────────
 .nav-item {
   width: 100%;
   @include flex-row($sp-3);
@@ -54,14 +57,15 @@
     &::before {
       content: '';
       position: absolute;
-      left: 0; top: 18%; bottom: 18%;
+      left: 0;
+      top: 18%;
+      bottom: 18%;
       width: 2px;
       border-radius: 0 2px 2px 0;
       background: var(--accent);
     }
   }
 
-  // Devicon icon
   &__icon {
     font-size: clamp(15px, 1.6vw, 18px);
     flex-shrink: 0;
@@ -70,7 +74,10 @@
     text-align: center;
   }
 
-  &__label { flex: 1; @include truncate; }
+  &__label {
+    flex: 1;
+    @include truncate;
+  }
 
   &__badge {
     font-size: $fs-xs;
@@ -85,7 +92,6 @@
   }
 }
 
-// ── Bottom ────────────────────────────────────────────────────
 .sidebar-bottom {
   margin-top: auto;
   padding-top: $sp-4;
@@ -97,7 +103,6 @@
   margin: $sp-2 $sp-2 $sp-3;
 }
 
-// ── Interview Quiz ────────────────────────────────────────────
 .nav-item--interview {
   border: 1px solid color-mix(in srgb, var(--accent) 22%, transparent);
   background: color-mix(in srgb, var(--accent) 5%, transparent);
@@ -116,7 +121,9 @@
     &::before {
       content: '';
       position: absolute;
-      left: 0; top: 18%; bottom: 18%;
+      left: 0;
+      top: 18%;
+      bottom: 18%;
       width: 2px;
       border-radius: 0 2px 2px 0;
       background: var(--accent);
@@ -125,13 +132,18 @@
 
   .nav-item__icon {
     @include flex-center;
-    width: 32px; height: 32px;
+    width: 32px;
+    height: 32px;
     border-radius: $r-sm;
     background: color-mix(in srgb, var(--accent) 14%, transparent);
     border: 1px solid color-mix(in srgb, var(--accent) 25%, transparent);
     flex-shrink: 0;
 
-    svg { width: 14px; height: 14px; color: var(--accent); }
+    svg {
+      width: 14px;
+      height: 14px;
+      color: var(--accent);
+    }
   }
 
   .nav-item__info {
@@ -155,7 +167,8 @@
   }
 
   .nav-item__pulse {
-    width: 6px; height: 6px;
+    width: 6px;
+    height: 6px;
     border-radius: $r-full;
     background: var(--accent);
     flex-shrink: 0;

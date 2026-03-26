@@ -3,7 +3,9 @@
 
 .bottom-nav {
   position: fixed;
-  bottom: 0; left: 0; right: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
   height: $bottom-nav-h;
   background: var(--surface);
   border-top: 1px solid var(--border);
@@ -13,7 +15,7 @@
   z-index: $z-bottom-nav;
   isolation: isolate;
   padding-bottom: env(safe-area-inset-bottom, 0px);
-  box-shadow: 0 -4px 20px rgba(120,90,210,0.06);
+  box-shadow: 0 -4px 20px rgba(120, 90, 210, 0.06);
 
   &__item {
     flex: 1;
@@ -30,7 +32,10 @@
     @include transition(color, $t-fast);
     @include focus-ring;
 
-    svg { width: 22px; height: 22px; }
+    svg {
+      width: 22px;
+      height: 22px;
+    }
 
     &--active {
       color: var(--accent);

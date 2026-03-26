@@ -14,14 +14,14 @@
   border-bottom: 1px solid var(--border);
 }
 
-// ── Logo (home view) ──────────────────────────────────────────
 .topbar-logo {
   display: flex;
   align-items: center;
   gap: $sp-3;
 
   &__icon {
-    width: 32px; height: 32px;
+    width: 32px;
+    height: 32px;
     border-radius: $r-sm;
     background: linear-gradient(135deg, var(--brand-start), var(--brand-end));
     display: flex;
@@ -29,7 +29,11 @@
     justify-content: center;
     color: #fff;
     flex-shrink: 0;
-    svg { width: 16px; height: 16px; }
+
+    svg {
+      width: 16px;
+      height: 16px;
+    }
   }
 
   &__title {
@@ -41,9 +45,9 @@
   }
 }
 
-// ── Back button ───────────────────────────────────────────────
 .topbar-back {
-  width: 34px; height: 34px;
+  width: 34px;
+  height: 34px;
   border-radius: $r-full;
   border: 1px solid var(--border);
   background: transparent;
@@ -55,11 +59,18 @@
   flex-shrink: 0;
   @include transition(all, $t-fast);
   @include focus-ring;
-  svg { width: 18px; height: 18px; }
-  &:hover { background: var(--surface-hover); border-color: var(--border-active); }
+
+  svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  &:hover {
+    background: var(--surface-hover);
+    border-color: var(--border-active);
+  }
 }
 
-// ── Section detail header ─────────────────────────────────────
 .topbar-detail-info {
   display: flex;
   align-items: center;
@@ -78,12 +89,15 @@
   color: var(--text);
 }
 
-// ── Screen title ──────────────────────────────────────────────
 .topbar-screen-icon {
   color: var(--accent);
   display: flex;
   align-items: center;
-  svg { width: 18px; height: 18px; }
+
+  svg {
+    width: 18px;
+    height: 18px;
+  }
 }
 
 .topbar-screen-title {
@@ -93,11 +107,13 @@
   color: var(--text);
 }
 
-.topbar-spacer { flex: 1; }
+.topbar-spacer {
+  flex: 1;
+}
 
-// ── Theme toggle ──────────────────────────────────────────────
 .topbar-theme-btn {
-  width: 34px; height: 34px;
+  width: 34px;
+  height: 34px;
   border-radius: $r-sm;
   border: 1px solid var(--border);
   background: transparent;
@@ -109,6 +125,15 @@
   justify-content: center;
   @include transition(all, $t-fast);
   @include focus-ring;
-  svg { width: 16px; height: 16px; }
-  &:hover { background: var(--surface-hover); color: var(--accent); border-color: var(--border-active); }
+
+  svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  &:hover {
+    background: var(--surface-hover);
+    color: var(--accent);
+    border-color: var(--border-active);
+  }
 }

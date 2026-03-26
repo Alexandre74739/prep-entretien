@@ -10,7 +10,10 @@
   flex-direction: column;
   animation: fadeIn 0.2s $ease both;
 
-  &--exit { animation: splashOut 0.6s $ease forwards; pointer-events: none; }
+  &--exit {
+    animation: splashOut 0.6s $ease forwards;
+    pointer-events: none;
+  }
 }
 
 .splash__inner {
@@ -28,7 +31,11 @@
   @include flex-center;
   box-shadow: 0 12px 40px color-mix(in srgb, var(--brand-start) 30%, transparent);
 
-  svg { width: clamp(30px, 4vw, 38px); height: clamp(30px, 4vw, 38px); color: #fff; }
+  svg {
+    width: clamp(30px, 4vw, 38px);
+    height: clamp(30px, 4vw, 38px);
+    color: #fff;
+  }
 }
 
 .splash__name {
@@ -67,5 +74,8 @@
   animation-delay: 0.4s;
   transform-origin: left;
 
-  &--done { width: 100%; animation: none; }
+  &--done {
+    width: 100%;
+    animation: none;
+  }
 }

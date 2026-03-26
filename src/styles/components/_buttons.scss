@@ -16,10 +16,13 @@
   white-space: nowrap;
   user-select: none;
 
-  &:disabled { opacity: 0.35; cursor: not-allowed; pointer-events: none; }
+  &:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
 }
 
-// ── Primary ───────────────────────────────────────────────────
 .btn--primary {
   background: var(--accent);
   color: #fff;
@@ -31,10 +34,13 @@
     transform: translateY(-1px);
     box-shadow: 0 2px 8px color-mix(in srgb, var(--accent) 45%, transparent);
   }
-  &:active:not(:disabled) { transform: translateY(0); filter: brightness(0.95); }
+
+  &:active:not(:disabled) {
+    transform: translateY(0);
+    filter: brightness(0.95);
+  }
 }
 
-// ── Outline ───────────────────────────────────────────────────
 .btn--outline {
   border-color: var(--border-2);
   background: transparent;
@@ -47,14 +53,16 @@
   }
 }
 
-// ── Ghost ─────────────────────────────────────────────────────
 .btn--ghost {
   background: transparent;
   color: var(--text-sub);
-  &:hover:not(:disabled) { background: var(--surface-hover); color: var(--text-2); }
+
+  &:hover:not(:disabled) {
+    background: var(--surface-hover);
+    color: var(--text-2);
+  }
 }
 
-// ── Danger ────────────────────────────────────────────────────
 .btn--danger {
   border-color: color-mix(in srgb, var(--danger) 30%, transparent);
   background: color-mix(in srgb, var(--danger) 6%, transparent);
@@ -66,7 +74,6 @@
   }
 }
 
-// ── Edit ──────────────────────────────────────────────────────
 .btn--edit {
   border-color: var(--border-2);
   background: transparent;
@@ -79,7 +86,6 @@
   }
 }
 
-// ── Back ──────────────────────────────────────────────────────
 .btn--back {
   @include flex-row($sp-1);
   @include transition(all, $t-fast);
@@ -102,7 +108,6 @@
   }
 }
 
-// ── Submit ────────────────────────────────────────────────────
 .btn--submit {
   width: 100%;
   padding: clamp(11px, 1.3vw, 14px);
@@ -123,5 +128,9 @@
     filter: brightness(1.1);
     box-shadow: 0 6px 20px color-mix(in srgb, var(--accent) 40%, transparent);
   }
-  &:active { transform: translateY(0); filter: brightness(0.95); }
+
+  &:active {
+    transform: translateY(0);
+    filter: brightness(0.95);
+  }
 }
